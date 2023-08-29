@@ -1,0 +1,47 @@
+se debe configurar windows para que nos permita la ejecucion de python virtual en vsc
+Abrir PowerShell como administrado y ejecutar el siguiente comando:
+- Set-ExecutionPolicy -Scope LocalMachine -ExecutionPolicy Bypass
+
+Una vez ejecutado ese comando, cerrar powerShell y verificar que se encuentre instalado python en su computador
+Asegurarse que python esté agregado en variables de entorno.
+
+Crear una carpeta en el directorio donde se desea crear los diferentes archivos py
+Abrir visual studio code
+y abrir la carpeta creada anteriormente
+a Continuación en la pestaña de Terminal , abrir un nuevo Terminal
+
+Una vez instalado python instalar el sistema virtual con el siguiente comando:
+- python -m venv nombre_entorno
+Para activar el entorno virtual ejecutar:
+- nombre_entorno\Scripts\activate
+Aquí se puede instalar todos los paquete de python que se requieran utilizar en el entorno virtual
+para verificar que paquetes se encuentran instalados ejecutar:
+- pip freeze
+
+Instalar paquetes para esp32
+- pip install esptool adafruit-ampy
+
+Flashear la esp32 con el .bin
+*Para entornos no virtuales
+- esptool.py --chip esp32 --port /dev/ttyUSB0 write_flash -z 0x1000 firmware.bin
+*Para entornos virtuales
+- python -m esptool --chip esp32 --port com3 write_flash -z 0x1000 esp32-20230426-v1.20.0.bin
+
+Para enviar el código a la esp32
+- ampy --port com3 put blink1.py
+
+Para ver los archivos en la esp32
+- ampy --port com3 ls
+
+Para ejecutar los archivos en la esp32
+- ampy --port com3 run blink1.py
+
+
+//opcional
+Para ver el serial
+- platformio device monitor --baud 115200
+
+ampy --port com3 run -n --no-output "import os; os.remove('main.py')"
+
+Eliminar el Flash
+- python -m esptool --port com3 erase_flash
