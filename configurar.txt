@@ -27,6 +27,8 @@ Flashear la esp32 con el .bin
 *Para entornos virtuales
 - python -m esptool --chip esp32 --port com3 write_flash -z 0x1000 esp32-20230426-v1.20.0.bin
 
+#Para el archivo final a cargar en el flasheo dirigirse a https://micropython.org/download/ESP32_GENERIC/ y seleccionar la adecuada para su tarjeta
+
 Para enviar el código a la esp32
 - ampy --port com3 put blink1.py
 
